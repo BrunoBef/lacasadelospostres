@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Casa de los Postres - Pedidos Online</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pacifico & Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        choco: '#4E342E',
+                        chocoDark: '#3E2723',
+                        pinkVibrant: '#E91E63',
+                        pinkPastel: '#F8BBD0',
+                        pinkLight: '#FCE4EC',
+                        cream: '#FFF8F0',
+                    },
+                    fontFamily: {
+                        script: ['Pacifico', 'cursive'],
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para detalles decorativos */
+        body {
+            background-color: #FFF8F0;
+            color: #4E342E;
+            background-image: radial-gradient(#F8BBD0 1.2px, transparent 1.2px);
+            background-size: 24px 24px;
+        }
+        .text-outline {
+            text-shadow: 2px 2px 0px #FFF8F0, -2px -2px 0px #FFF8F0, 2px -2px 0px #FFF8F0, -2px 2px 0px #FFF8F0, 0px 4px 8px rgba(78, 52, 46, 0.25);
+        }
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF8F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F8BBD0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E91E63;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-pinkVibrant selection:text-white pb-24 md:pb-12">
+
+    <!-- EFECTO DE CHOCOLATE DERRETIDO SUPERIOR -->
+    <div class="w-full overflow-hidden leading-none bg-choco relative">
+        <!-- Barra superior con info rápida -->
+        <div class="max-w-6xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center text-cream text-xs sm:text-sm font-medium">
+            <a href="https://instagram.com/_Lacasadelospostres" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-pinkPastel transition">
+                <i class="fa-brands fa-instagram text-base text-pinkPastel"></i>
+                <span>@_Lacasadelospostres</span>
+            </a>
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:inline text-pinkPastel">Pedidos por WhatsApp:</span>
+                <a href="https://wa.me/5491168167726" target="_blank" class="hover:text-pinkPastel transition flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp text-green-400"></i> 11-6816-7726
+                </a>
+                <span>|</span>
+                <a href="https://wa.me/5491168617706" target="_blank" class="hover:text-pinkPastel transition flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp text-green-400"></i> 11-6861-7706
+                </a>
+            </div>
+        </div>
+        <!-- SVG Chocolate Derretido -->
+        <div class="w-full bg-cream">
+            <svg viewBox="0 0 1440 110" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-12 sm:h-16 md:h-20 preserve-3d block">
+                <path d="M0 0H1440V32C1415 32 1405 78 1380 78C1355 78 1348 28 1320 28C1292 28 1280 95 1250 95C1220 95 1212 35 1180 35C1148 35 1135 72 1105 72C1075 72 1068 25 1035 25C1002 25 990 105 955 105C920 105 910 38 875 38C840 38 828 82 795 82C762 82 752 22 720 22C688 22 675 92 640 92C605 92 595 32 560 32C525 32 512 75 480 75C448 75 438 25 405 25C372 25 358 100 320 100C282 100 272 35 235 35C198 35 185 80 150 80C115 80 105 28 70 28C35 28 22 68 0 68V0Z" fill="#4E342E"/>
+                <!-- Brillo sutil en el chocolate -->
+                <path d="M1245 78C1245 84 1248 88 1251 88C1254 88 1256 84 1256 78" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+                <path d="M950 88C950 94 953 98 956 98C959 98 961 94 961 88" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+                <path d="M315 82C315 88 318 92 321 92C324 92 326 88 326 82" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ENCABEZADO / HERO -->
+    <header class="max-w-5xl mx-auto px-4 pt-2 pb-6 text-center relative">
+        <!-- Corazones flotantes decorativos -->
+        <span class="hidden sm:inline-block absolute top-6 left-10 text-pinkVibrant/40 text-2xl animate-float">♥</span>
+        <span class="hidden sm:inline-block absolute top-12 right-12 text-pinkVibrant/50 text-3xl animate-float" style="animation-delay: 1s;">♥</span>
+        <span class="hidden md:inline-block absolute bottom-8 left-20 text-pinkPastel text-3xl animate-float" style="animation-delay: 0.5s;">♥</span>
+
+        <!-- Logo con Gorro de Chef -->
+        <div class="inline-flex flex-col items-center justify-center relative">
+            <div class="bg-white border-4 border-choco rounded-full p-3 shadow-md mb-1 -rotate-6 transform hover:rotate-0 transition duration-300">
+                <!-- SVG Gorro de Chef -->
+                <svg class="w-10 h-10 sm:w-12 sm:h-12 text-choco" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 44H46V52C46 54.2091 44.2091 56 42 56H22C19.7909 56 18 54.2091 18 52V44Z" fill="#F8BBD0" stroke="#4E342E" stroke-width="3.5" stroke-linejoin="round"/>
+                    <path d="M18 44C12.4772 44 8 39.5228 8 34C8 29.2116 11.3662 25.2094 15.8622 24.2297C16.8266 16.1973 23.6811 10 32 10C40.3189 10 47.1734 16.1973 48.1378 24.2297C52.6338 25.2094 56 29.2116 56 34C56 39.5228 51.5228 44 46 44H18Z" fill="#FFFFFF" stroke="#4E342E" stroke-width="3.5" stroke-linejoin="round"/>
+                    <path d="M25 44V49M32 44V49M39 44V49" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <span class="font-script text-xl sm:text-2xl text-choco tracking-wide">La Casa de los</span>
+            <h1 class="font-script text-5xl sm:text-6xl md:text-7xl text-choco text-outline leading-tight -mt-1">
+                Postres
+            </h1>
+            <div class="flex items-center gap-2 mt-1 text-choco">
+                <span class="h-0.5 w-12 bg-choco rounded-full"></span>
+                <i class="fa-solid fa-heart text-pinkVibrant text-sm"></i>
+                <span class="h-0.5 w-12 bg-choco rounded-full"></span>
+            </div>
+        </div>
+
+        <!-- Banner destacado de Envíos Gratis -->
+        <div class="mt-5 flex justify-center">
+            <div class="bg-pinkVibrant text-white px-6 py-2.5 rounded-full shadow-lg border-2 border-white flex items-center gap-2.5 transform hover:scale-105 transition duration-300">
+                <span class="text-xl sm:text-2xl">🚚</span>
+                <span class="font-bold text-sm sm:text-lg tracking-wide">Envíos gratis por la zona ♡</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- BARRA DE BÚSQUEDA, FILTROS Y BOTÓN DE CARRITO FLOTANTE/SUPERIOR -->
+    <div class="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b-2 border-pinkPastel/70 shadow-sm py-3 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-3 items-center justify-between">
+            
+            <!-- Buscador -->
+            <div class="relative w-full md:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-choco/50"></i>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Buscar sabor (ej. Chocotorta, Flan...)" 
+                    class="w-full pl-10 pr-4 py-2 rounded-full bg-white border-2 border-pinkPastel focus:border-pinkVibrant focus:outline-none text-sm font-medium text-choco placeholder-choco/40 transition"
+                >
+            </div>
+
+            <!-- Filtros por categoría -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar justify-start md:justify-center" id="categoryFilters">
+                <button data-category="all" class="filter-btn active bg-choco text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap shadow-sm transition">
+                    Todos (11)
+                </button>
+                <button data-category="vaso" class="filter-btn bg-white text-choco border border-pinkPastel hover:bg-pinkLight px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition">
+                    🍫 Postres en Vaso
+                </button>
+                <button data-category="frutal" class="filter-btn bg-white text-choco border border-pinkPastel hover:bg-pinkLight px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition">
+                    🍓 Frutales
+                </button>
+                <button data-category="flan" class="filter-btn bg-white text-choco border border-pinkPastel hover:bg-pinkLight px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition">
+                    🍮 Flanes
+                </button>
+            </div>
+
+            <!-- Botón Carrito (Desktop) -->
+            <button onclick="toggleCart(true)" class="hidden md:flex items-center gap-2.5 bg-pinkVibrant hover:bg-pink-700 text-white px-5 py-2 rounded-full font-bold shadow-md transition transform active:scale-95">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Mi Pedido</span>
+                <span id="desktopCartCount" class="bg-white text-pinkVibrant text-xs font-extrabold px-2 py-0.5 rounded-full">0</span>
+                <span id="desktopCartTotal" class="text-sm border-l border-white/30 pl-2">$0</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PRINCIPAL: CATÁLOGO DE NUESTROS SABORES -->
+    <main class="max-w-6xl mx-auto px-4 pt-6">
+        
+        <!-- Cinta de título de sección estilo flyer -->
+        <div class="flex justify-center mb-8">
+            <div class="bg-pinkVibrant text-white px-8 py-2 rounded-2xl shadow-md transform -rotate-1 border-2 border-white">
+                <h2 class="font-script text-2xl sm:text-3xl tracking-wide flex items-center gap-2">
+                    <span>♥</span> Nuestros Sabores <span>♥</span>
+                </h2>
+            </div>
+        </div>
+
+        <!-- Grid de Productos -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Las tarjetas se renderizan dinámicamente con JS -->
+        </div>
+
+        <!-- Estado vacío en búsqueda -->
+        <div id="emptySearch" class="hidden text-center py-12 bg-white/80 rounded-3xl border-2 border-dashed border-pinkPastel max-w-md mx-auto">
+            <div class="text-4xl mb-2">🍨</div>
+            <h3 class="font-bold text-lg text-choco">No encontramos ese sabor</h3>
+            <p class="text-sm text-choco/70 mt-1">Probá buscando otro postre o mirá toda nuestra carta.</p>
+            <button onclick="resetFilters()" class="mt-4 bg-pinkVibrant text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-pink-700 transition">
+                Ver todos los sabores
+            </button>
+        </div>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="mt-16 bg-choco text-cream rounded-t-[2.5rem] pt-10 pb-24 md:pb-10 px-4 border-t-4 border-pinkVibrant">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                <h3 class="font-script text-3xl text-pinkPastel">La Casa de los Postres</h3>
+                <p class="text-sm text-cream/80 mt-1">Postres artesanales en vaso hechos con mucho amor ♥</p>
+                <p class="text-xs text-pinkPastel font-semibold mt-1">🚚 ¡Envíos gratis por la zona!</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <a href="https://instagram.com/_Lacasadelospostres" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-pinkVibrant text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold text-sm transition">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                    <span>@_Lacasadelospostres</span>
+                </a>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <a href="https://wa.me/5491168167726" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-full flex items-center gap-2 font-bold text-sm transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>1168167726</span>
+                    </a>
+                    <a href="https://wa.me/5491168617706" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-full flex items-center gap-2 font-bold text-sm transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>1168617706</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BARRA FLOTANTE INFERIOR PARA MÓVILES -->
+    <div class="fixed bottom-4 left-4 right-4 z-30 md:hidden">
+        <button onclick="toggleCart(true)" class="w-full bg-pinkVibrant hover:bg-pink-700 text-white py-3.5 px-6 rounded-full shadow-2xl border-2 border-white flex items-center justify-between font-bold transition transform active:scale-95">
+            <div class="flex items-center gap-2.5">
+                <span class="bg-white text-pinkVibrant w-7 h-7 rounded-full flex items-center justify-center text-sm font-extrabold" id="mobileCartCount">0</span>
+                <span>Ver mi pedido</span>
+            </div>
+            <span class="text-lg font-extrabold" id="mobileCartTotal">$0</span>
+        </button>
+    </div>
+
+    <!-- PANEL LATERAL DEL CARRITO Y CHECKOUT (DRAWER) -->
+    <div id="cartOverlay" onclick="toggleCart(false)" class="fixed inset-0 bg-chocoDark/60 backdrop-blur-xs z-40 hidden transition-opacity"></div>
+    
+    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-cream z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l-4 border-pinkVibrant">
+        
+        <!-- Header del Carrito -->
+        <div class="bg-choco text-white p-4 flex items-center justify-between shadow-md">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-bag-shopping text-pinkPastel text-xl"></i>
+                <h2 class="font-script text-2xl tracking-wide">Tu Pedido Dulce</h2>
+            </div>
+            <button onclick="toggleCart(false)" class="w-9 h-9 rounded-full bg-white/10 hover:bg-pinkVibrant flex items-center justify-center text-white transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Contenido scrolleable del carrito -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-5">
+            
+            <!-- Lista de productos agregados -->
+            <div id="cartItemsContainer" class="space-y-3">
+                <!-- Items renderizados por JS -->
+            </div>
+
+            <!-- Formulario de Checkout (visible cuando hay items) -->
+            <div id="checkoutFormSection" class="hidden bg-white p-4 rounded-2xl border-2 border-pinkPastel shadow-xs space-y-4">
+                <div class="border-b border-pinkLight pb-2 flex items-center justify-between">
+                    <h3 class="font-bold text-choco flex items-center gap-2">
+                        <i class="fa-solid fa-motorcycle text-pinkVibrant"></i> Datos para la entrega
+                    </h3>
+                    <span class="text-xs bg-pinkLight text-pinkVibrant font-bold px-2.5 py-0.5 rounded-full">Envío Gratis ♡</span>
+                </div>
+
+                <!-- Nombre -->
+                <div>
+                    <label class="block text-xs font-bold text-choco mb-1">Tu Nombre *</label>
+                    <input type="text" id="customerName" placeholder="Ej. Camila Gómez" class="w-full px-3.5 py-2 rounded-xl bg-cream/60 border border-pinkPastel focus:border-pinkVibrant focus:outline-none text-sm">
+                </div>
+
+                <!-- Dirección -->
+                <div>
+                    <label class="block text-xs font-bold text-choco mb-1">Dirección de entrega (por la zona) *</label>
+                    <input type="text" id="customerAddress" placeholder="Calle, altura, entre calles o referencia" class="w-full px-3.5 py-2 rounded-xl bg-cream/60 border border-pinkPastel focus:border-pinkVibrant focus:outline-none text-sm">
+                </div>
+
+                <!-- Método de pago -->
+                <div>
+                    <label class="block text-xs font-bold text-choco mb-1">Método de pago</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="Efectivo" checked class="peer hidden">
+                            <div class="text-center py-2 px-3 rounded-xl border-2 border-pinkPastel peer-checked:border-pinkVibrant peer-checked:bg-pinkLight/60 font-bold text-xs text-choco transition">
+                                💵 Efectivo
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="Transferencia" class="peer hidden">
+                            <div class="text-center py-2 px-3 rounded-xl border-2 border-pinkPastel peer-checked:border-pinkVibrant peer-checked:bg-pinkLight/60 font-bold text-xs text-choco transition">
+                                📲 Transferencia
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Notas adicionales -->
+                <div>
+                    <label class="block text-xs font-bold text-choco mb-1">Notas adicionales (opcional)</label>
+                    <textarea id="customerNotes" rows="2" placeholder="Ej. Tocar timbre fuerte, pago con cambio, etc." class="w-full px-3.5 py-2 rounded-xl bg-cream/60 border border-pinkPastel focus:border-pinkVibrant focus:outline-none text-sm resize-none"></textarea>
+                </div>
+
+                <!-- Selector de WhatsApp -->
+                <div>
+                    <label class="block text-xs font-bold text-choco mb-1">Enviar pedido al WhatsApp:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="whatsappNumber" value="5491168167726" checked class="peer hidden">
+                            <div class="flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl border-2 border-pinkPastel peer-checked:border-green-600 peer-checked:bg-green-50 font-bold text-xs text-choco transition">
+                                <i class="fa-brands fa-whatsapp text-green-600 text-sm"></i>
+                                <span>1168167726</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="whatsappNumber" value="5491168617706" class="peer hidden">
+                            <div class="flex items-center justify-center gap-1.5 py-2 px-2 rounded-xl border-2 border-pinkPastel peer-checked:border-green-600 peer-checked:bg-green-50 font-bold text-xs text-choco transition">
+                                <i class="fa-brands fa-whatsapp text-green-600 text-sm"></i>
+                                <span>1168617706</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer del Carrito con Totales y Botones de Acción -->
+        <div id="cartFooter" class="hidden bg-white border-t-2 border-pinkPastel p-4 space-y-3 shadow-inner">
+            <div class="space-y-1 text-sm">
+                <div class="flex justify-between text-choco/80">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal" class="font-semibold">$0</span>
+                </div>
+                <div class="flex justify-between text-pinkVibrant font-bold">
+                    <span>Envío por la zona</span>
+                    <span>¡GRATIS! 🚚</span>
+                </div>
+                <div class="flex justify-between text-lg font-extrabold text-choco pt-1 border-t border-pinkLight">
+                    <span>Total a pagar</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-full font-bold shadow-md flex items-center justify-center gap-2 transition transform active:scale-98">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Enviar Pedido por WhatsApp</span>
+                </button>
+                <button onclick="copyOrderToClipboard()" class="w-full bg-pinkLight hover:bg-pinkPastel text-choco py-2 px-4 rounded-full font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copiar detalle del pedido</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- NOTIFICACIÓN TOAST PERSONALIZADA (Sin alert()) -->
+    <div id="toastNotification" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-4">
+        <div id="toastBox" class="bg-choco text-white px-5 py-3 rounded-full shadow-xl border-2 border-pinkPastel flex items-center gap-2.5 text-sm font-bold">
+            <span id="toastIcon">💖</span>
+            <span id="toastMessage">Producto agregado</span>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // BASE DE DATOS DEL CATÁLOGO (11 SABORES)
+        // ==========================================
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "Chocotorta",
+                price: 3000,
+                category: "vaso",
+                badge: "Clásico Favorito",
+                description: "Capas irresistibles de galletitas Chocolinas humedecidas, intercaladas con nuestra crema suave de dulce de leche y queso crema.",
+                variants: null,
+                themeColor: "#5D4037",
+                accentColor: "#D7CCC8",
+                toppingEmoji: "🍪"
+            },
+            {
+                id: 2,
+                name: "Oreo",
+                price: 3000,
+                category: "vaso",
+                badge: "Súper Cremoso",
+                description: "Base crocante de galletitas Oreo trituradas, crema chantilly suave, dulce de leche repostero y coronado con una Oreo entera.",
+                variants: null,
+                themeColor: "#212121",
+                accentColor: "#F5F5F5",
+                toppingEmoji: "🖤"
+            },
+            {
+                id: 3,
+                name: "Tiramisú",
+                price: 3000,
+                category: "vaso",
+                badge: "Especial",
+                description: "Vainillas embebidas en café suave, crema tipo mascarpone aterciopelada y un toque generoso de cacao amargo espolvoreado.",
+                variants: null,
+                themeColor: "#6D4C41",
+                accentColor: "#FFF3E0",
+                toppingEmoji: "☕"
+            },
+            {
+                id: 4,
+                name: "Rocklets",
+                price: 3000,
+                category: "vaso",
+                badge: "Elegí tu base",
+                description: "Cremoso postre en vaso con dulce de leche, crema suave y lluvia colorida de confites Rocklets crocantes.",
+                variants: ["Vainilla", "Chocolate"],
+                themeColor: "#E91E63",
+                accentColor: "#FFEB3B",
+                toppingEmoji: "🌈"
+            },
+            {
+                id: 5,
+                name: "Cheesecake",
+                price: 5000,
+                category: "vaso",
+                badge: "Premium ★",
+                description: "Base crocante de galletitas dulces, suave y cremosa mousse de queso con un toque de vainilla y cobertura artesanal de frutos rojos.",
+                variants: null,
+                themeColor: "#C2185B",
+                accentColor: "#FCE4EC",
+                toppingEmoji: "🍒"
+            },
+            {
+                id: 6,
+                name: "Frutilla con crema",
+                price: 3000,
+                category: "frutal",
+                badge: "Fresco & Dulce",
+                description: "Trozos seleccionados de frutillas frescas maceradas, acompañadas de abundante crema chantilly batida a punto justo.",
+                variants: null,
+                themeColor: "#E53935",
+                accentColor: "#FFCDD2",
+                toppingEmoji: "🍓"
+            },
+            {
+                id: 7,
+                name: "Durazno con crema",
+                price: 3000,
+                category: "frutal",
+                badge: "Clásico Frutal",
+                description: "Trozos jugosos de duraznos en almíbar combinados con nuestra clásica crema chantilly súper suave y fresca.",
+                variants: null,
+                themeColor: "#FB8C00",
+                accentColor: "#FFE0B2",
+                toppingEmoji: "🍑"
+            },
+            {
+                id: 8,
+                name: "Mixto con crema",
+                subtitle: "(durazno y frutilla)",
+                price: 3000,
+                category: "frutal",
+                badge: "Combinado",
+                description: "La combinación perfecta de frutillas frescas y duraznos en almíbar en capas con abundante crema chantilly.",
+                variants: null,
+                themeColor: "#F06292",
+                accentColor: "#FFE0B2",
+                toppingEmoji: "🍓🍑"
+            },
+            {
+                id: 9,
+                name: "Flan",
+                price: 2000,
+                category: "flan",
+                badge: "Casero",
+                description: "Flan casero súper suave y cremoso bañado en caramelo líquido dorado artesanal. ¡Un clásico que nunca falla!",
+                variants: null,
+                themeColor: "#FFB300",
+                accentColor: "#FFF8E1",
+                toppingEmoji: "🍮"
+            },
+            {
+                id: 10,
+                name: "Flan con 1 agregado",
+                price: 2500,
+                category: "flan",
+                badge: "Elegí 1 agregado",
+                description: "Nuestro delicioso flan casero con caramelo, acompañado con una porción generosa del agregado que prefieras.",
+                variants: ["Crema", "Dulce de leche"],
+                themeColor: "#FFA000",
+                accentColor: "#FFECB3",
+                toppingEmoji: "🥄"
+            },
+            {
+                id: 11,
+                name: "Flan completo",
+                subtitle: "(crema y dulce de leche)",
+                price: 3000,
+                category: "flan",
+                badge: "Súper Completo",
+                description: "Flan casero con caramelo acompañado de doble tentación: crema chantilly suave y dulce de leche repostero.",
+                variants: null,
+                themeColor: "#8D6E63",
+                accentColor: "#FFF8E1",
+                toppingEmoji: "👑"
+            }
+        ];
+
+        // Estado de la aplicación
+        let cart = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+        // Almacena la variante seleccionada por cada tarjeta de producto
+        const selectedVariants = {
+            4: "Vainilla",
+            10: "Crema"
+        };
+
+        // ==========================================
+        // UTILIDADES Y FORMATO
+        // ==========================================
+        function formatARS(amount) {
+            return '$' + amount.toLocaleString('es-AR');
+        }
+
+        function showToast(message, icon = "💖", isError = false) {
+            const toast = document.getElementById('toastNotification');
+            const toastBox = document.getElementById('toastBox');
+            document.getElementById('toastMessage').textContent = message;
+            document.getElementById('toastIcon').textContent = icon;
+
+            if (isError) {
+                toastBox.classList.remove('bg-choco');
+                toastBox.classList.add('bg-red-600');
+            } else {
+                toastBox.classList.remove('bg-red-600');
+                toastBox.classList.add('bg-choco');
+            }
+
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-4');
+            }, 2600);
+        }
+
+        // Genera una ilustración SVG personalizada de postre en vaso o flan según el producto
+        function getDessertSVG(product) {
+            if (product.category === 'flan') {
+                return `
+                <svg viewBox="0 0 120 100" class="w-24 h-24 drop-shadow-md transform group-hover:scale-105 transition duration-300">
+                    <!-- Platito -->
+                    <ellipse cx="60" cy="84" rx="46" ry="10" fill="#FFFFFF" stroke="#4E342E" stroke-width="2.5"/>
+                    <!-- Cuerpo del flan -->
+                    <path d="M32 80 L40 42 C41 37 79 37 80 42 L88 80 Z" fill="#FFCA28" stroke="#4E342E" stroke-width="2.5" stroke-linejoin="round"/>
+                    <!-- Caramelo derretido encima -->
+                    <path d="M39 44 C39 36 81 36 81 44 C81 50 75 56 72 50 C69 44 65 58 60 58 C55 58 51 45 48 51 C45 57 39 50 39 44 Z" fill="#8D4004"/>
+                    ${product.id === 11 ? `<circle cx="60" cy="34" r="9" fill="#FFF" stroke="#4E342E" stroke-width="2"/><circle cx="72" cy="76" r="8" fill="#6D4C41" stroke="#4E342E" stroke-width="2"/>` : ''}
+                    ${product.id === 10 ? `<circle cx="60" cy="34" r="8" fill="#FFF8E1" stroke="#4E342E" stroke-width="2"/>` : ''}
+                </svg>`;
+            }
+
+            // Ilustración de Vaso de Postre en capas
+            return `
+            <svg viewBox="0 0 120 110" class="w-24 h-24 drop-shadow-md transform group-hover:scale-105 transition duration-300">
+                <!-- Crema superior -->
+                <path d="M34 38 C34 22 86 22 86 38 Z" fill="#FFFFFF" stroke="#4E342E" stroke-width="2.5"/>
+                <path d="M44 26 C48 16 72 16 76 26" fill="#FFFFFF" stroke="#4E342E" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Vaso transparente con capas -->
+                <path d="M30 38 H90 L80 94 C79 98 41 98 40 94 L30 38 Z" fill="${product.accentColor}" stroke="#4E342E" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Capa intermedia sabor -->
+                <path d="M33 54 H87 L84 70 H36 L33 54 Z" fill="${product.themeColor}"/>
+                <!-- Capa base -->
+                <path d="M38 82 H82 L80 94 C79 97 41 97 40 94 L38 82 Z" fill="${product.themeColor}" opacity="0.85"/>
+                <!-- Borde del vaso -->
+                <rect x="27" y="35" width="66" height="5" rx="2.5" fill="#FFFFFF" stroke="#4E342E" stroke-width="2"/>
+            </svg>`;
+        }
+
+        // ==========================================
+        // RENDERIZADO DEL CATÁLOGO
+        // ==========================================
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptySearch');
+
+            const filtered = PRODUCTS.filter(p => {
+                const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+                const query = searchQuery.toLowerCase().trim();
+                const matchesSearch = p.name.toLowerCase().includes(query) || 
+                                      p.description.toLowerCase().includes(query) ||
+                                      (p.subtitle && p.subtitle.toLowerCase().includes(query));
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => {
+                const hasVariants = Array.isArray(product.variants);
+                const currentVariant = hasVariants ? selectedVariants[product.id] : null;
+
+                return `
+                <article class="group bg-white rounded-3xl border-2 border-pinkPastel hover:border-pinkVibrant shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div>
+                        <!-- Cabecera visual de la tarjeta -->
+                        <div class="bg-gradient-to-br from-pinkLight via-cream to-pinkPastel/40 p-4 relative flex items-center justify-center border-b border-pinkPastel/50">
+                            <span class="absolute top-3 left-3 bg-white/90 text-choco text-[11px] font-bold px-3 py-1 rounded-full shadow-xs border border-pinkPastel">
+                                ${product.badge}
+                            </span>
+                            <span class="absolute top-3 right-3 text-xl" title="${product.name}">
+                                ${product.toppingEmoji}
+                            </span>
+                            ${getDessertSVG(product)}
+                        </div>
+
+                        <!-- Info del postre -->
+                        <div class="p-5 pb-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <div>
+                                    <h3 class="font-bold text-xl text-choco leading-snug flex items-center gap-1.5">
+                                        <span class="text-pinkVibrant text-sm">♥</span> ${product.name}
+                                    </h3>
+                                    ${product.subtitle ? `<p class="text-xs font-semibold text-pinkVibrant mt-0.5">${product.subtitle}</p>` : ''}
+                                </div>
+                                <span class="bg-pinkPastel/70 text-choco font-extrabold text-base px-3.5 py-1 rounded-full border border-pinkVibrant/20 shrink-0">
+                                    ${formatARS(product.price)}
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-choco/75 mt-2.5 leading-relaxed">
+                                ${product.description}
+                            </p>
+
+                            <!-- Selector de variantes (Rocklets / Flan con 1 agregado) -->
+                            ${hasVariants ? `
+                            <div class="mt-4 pt-3 border-t border-pinkLight">
+                                <span class="block text-xs font-bold text-choco mb-2">Elegí una opción:</span>
+                                <div class="flex gap-2">
+                                    ${product.variants.map(variant => `
+                                        <button 
+                                            type="button"
+                                            onclick="selectProductVariant(${product.id}, '${variant}')"
+                                            class="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold border-2 transition ${
+                                                currentVariant === variant 
+                                                ? 'bg-choco text-white border-choco shadow-xs' 
+                                                : 'bg-cream text-choco border-pinkPastel hover:border-pinkVibrant'
+                                            }"
+                                        >
+                                            ${currentVariant === variant ? '✓ ' : ''}${variant}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Botón Agregar al Carrito -->
+                    <div class="p-5 pt-2">
+                        <button 
+                            onclick="addToCart(${product.id})"
+                            class="w-full bg-pinkVibrant hover:bg-pink-700 text-white font-bold py-2.5 px-4 rounded-2xl shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition transform active:scale-95"
+                        >
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Agregar al pedido</span>
+                        </button>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
+        function selectProductVariant(productId, variant) {
+            selectedVariants[productId] = variant;
+            renderProducts();
+        }
+
+        // ==========================================
+        // LÓGICA DEL CARRITO DE COMPRAS
+        // ==========================================
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const variant = product.variants ? selectedVariants[productId] : null;
+            const cartItemKey = variant ? `${product.id}-${variant}` : `${product.id}`;
+
+            const existingItem = cart.find(item => item.key === cartItemKey);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    key: cartItemKey,
+                    id: product.id,
+                    name: product.name,
+                    variant: variant,
+                    price: product.price,
+                    quantity: 1,
+                    emoji: product.toppingEmoji
+                });
+            }
+
+            updateCartUI();
+            const label = variant ? `${product.name} (${variant})` : product.name;
+            showToast(`¡Agregaste ${label}!`, product.toppingEmoji);
+        }
+
+        function changeQuantity(key, delta) {
+            const index = cart.findIndex(item => item.key === key);
+            if (index === -1) return;
+
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(key) {
+            cart = cart.filter(item => item.key !== key);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Actualizar contadores en header y barra móvil
+            document.getElementById('desktopCartCount').textContent = totalItems;
+            document.getElementById('desktopCartTotal').textContent = formatARS(subtotal);
+            document.getElementById('mobileCartCount').textContent = totalItems;
+            document.getElementById('mobileCartTotal').textContent = formatARS(subtotal);
+
+            const container = document.getElementById('cartItemsContainer');
+            const checkoutSection = document.getElementById('checkoutFormSection');
+            const footer = document.getElementById('cartFooter');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 px-4 bg-white rounded-3xl border-2 border-dashed border-pinkPastel">
+                        <div class="text-5xl mb-3">🧁</div>
+                        <h3 class="font-bold text-lg text-choco">Tu carrito está vacío</h3>
+                        <p class="text-sm text-choco/70 mt-1">¡Elegí tus sabores favoritos de La Casa de los Postres para empezar!</p>
+                        <button onclick="toggleCart(false)" class="mt-5 bg-pinkVibrant text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-pink-700 transition">
+                            Explorar Sabores
+                        </button>
+                    </div>
+                `;
+                checkoutSection.classList.add('hidden');
+                footer.classList.add('hidden');
+                return;
+            }
+
+            checkoutSection.classList.remove('hidden');
+            footer.classList.remove('hidden');
+
+            container.innerHTML = cart.map(item => `
+                <div class="bg-white p-3.5 rounded-2xl border border-pinkPastel shadow-2xs flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-pinkLight flex items-center justify-center text-xl shrink-0">
+                            ${item.emoji}
+                        </div>
+                        <div class="truncate">
+                            <h4 class="font-bold text-sm text-choco truncate">${item.name}</h4>
+                            ${item.variant ? `<span class="inline-block text-[11px] font-bold bg-pinkLight text-pinkVibrant px-2 py-0.5 rounded-md">${item.variant}</span>` : ''}
+                            <p class="text-xs font-extrabold text-choco/80 mt-0.5">${formatARS(item.price * item.quantity)}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="changeQuantity('${item.key}', -1)" class="w-7 h-7 rounded-full bg-cream hover:bg-pinkPastel text-choco font-bold flex items-center justify-center border border-pinkPastel transition">
+                            -
+                        </button>
+                        <span class="w-6 text-center text-sm font-extrabold text-choco">${item.quantity}</span>
+                        <button onclick="changeQuantity('${item.key}', 1)" class="w-7 h-7 rounded-full bg-pinkVibrant hover:bg-pink-700 text-white font-bold flex items-center justify-center transition">
+                            +
+                        </button>
+                        <button onclick="removeItem('${item.key}')" title="Eliminar" class="ml-1 text-choco/40 hover:text-red-500 p-1 transition">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('cartSubtotal').textContent = formatARS(subtotal);
+            document.getElementById('cartTotal').textContent = formatARS(subtotal);
+        }
+
+        function toggleCart(open) {
+            const overlay = document.getElementById('cartOverlay');
+            const drawer = document.getElementById('cartDrawer');
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+
+        // ==========================================
+        // GENERACIÓN DE PEDIDO Y WHATSAPP
+        // ==========================================
+        function buildOrderMessage() {
+            const name = document.getElementById('customerName').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+            const notes = document.getElementById('customerNotes').value.trim();
+            const payment = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            let lines = [];
+            lines.push(`🍰 *¡Hola La Casa de los Postres!* Quiero hacer el siguiente pedido:`);
+            lines.push(``);
+            lines.push(`*Detalle del pedido:*`);
+            cart.forEach(item => {
+                const variantText = item.variant ? ` (${item.variant})` : '';
+                lines.push(`▪ ${item.quantity}x ${item.name}${variantText} - ${formatARS(item.price * item.quantity)}`);
+            });
+            lines.push(``);
+            lines.push(`🚚 *Envío:* Gratis por la zona`);
+            lines.push(`💰 *Total a pagar:* ${formatARS(total)}`);
+            lines.push(`💳 *Método de pago:* ${payment}`);
+            lines.push(``);
+            lines.push(`👤 *Nombre:* ${name || 'A confirmar'}`);
+            lines.push(`📍 *Dirección:* ${address || 'A confirmar'}`);
+            if (notes) {
+                lines.push(`📝 *Notas:* ${notes}`);
+            }
+
+            return lines.join('\n');
+        }
+
+        function validateCheckout() {
+            const name = document.getElementById('customerName').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+
+            if (!name) {
+                showToast("Por favor, ingresá tu nombre", "⚠️", true);
+                document.getElementById('customerName').focus();
+                return false;
+            }
+            if (!address) {
+                showToast("Por favor, ingresá tu dirección de entrega", "📍", true);
+                document.getElementById('customerAddress').focus();
+                return false;
+            }
+            return true;
+        }
+
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) return;
+            if (!validateCheckout()) return;
+
+            const selectedPhone = document.querySelector('input[name="whatsappNumber"]:checked').value;
+            const message = buildOrderMessage();
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${selectedPhone}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function copyOrderToClipboard() {
+            if (cart.length === 0) return;
+            const message = buildOrderMessage();
+
+            // Método compatible con iFrames usando textarea + execCommand('copy')
+            const tempInput = document.createElement('textarea');
+            tempInput.value = message;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast("¡Pedido copiado al portapapeles!", "📋");
+            } catch (err) {
+                showToast("No se pudo copiar el texto", "⚠️", true);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // ==========================================
+        // EVENTOS DE BÚSQUEDA Y FILTROS
+        // ==========================================
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderProducts();
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-choco', 'text-white', 'active');
+                    b.classList.add('bg-white', 'text-choco', 'border', 'border-pinkPastel');
+                });
+                btn.classList.remove('bg-white', 'text-choco', 'border', 'border-pinkPastel');
+                btn.classList.add('bg-choco', 'text-white', 'active');
+
+                activeCategory = btn.dataset.category;
+                renderProducts();
+            });
+        });
+
+        function resetFilters() {
+            searchQuery = '';
+            activeCategory = 'all';
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-choco', 'text-white', 'active');
+                b.classList.add('bg-white', 'text-choco', 'border', 'border-pinkPastel');
+                if (b.dataset.category === 'all') {
+                    b.classList.remove('bg-white', 'text-choco', 'border', 'border-pinkPastel');
+                    b.classList.add('bg-choco', 'text-white', 'active');
+                }
+            });
+            renderProducts();
+        }
+
+        // Inicializar app al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
